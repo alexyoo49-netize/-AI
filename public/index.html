@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>내일경로 AI</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <strong>내일경로 AI</strong>
+        <span>청년 취업전략 시뮬레이터</span>
+      </div>
+      <button id="demoFillBtn" type="button">예시 입력</button>
+    </header>
+
+    <main class="shell">
+      <section class="intro">
+        <p class="eyebrow">고용노동부 공공데이터 224개 목록 기반 MVP</p>
+        <h1>지금 바로 취업할지, 훈련을 먼저 받을지 경로별 결과를 비교합니다.</h1>
+        <p>
+          자연어 고민과 이력서 내용을 AI 입력값처럼 구조화하고, ABM 시뮬레이션으로
+          바로 구직·상담·훈련·장려금 기업·통합경로를 비교합니다.
+        </p>
+      </section>
+
+      <section class="workspace">
+        <form id="profileForm" class="panel input-panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Step 1</p>
+              <h2>내 상황 입력</h2>
+            </div>
+            <span id="dataBadge">데이터 불러오는 중</span>
+          </div>
+
+          <label>
+            자연어 고민
+            <textarea id="story" rows="6" placeholder="예: 부산 사는 27살 문과 졸업생입니다. 데이터 분석 쪽으로 가고 싶은데 바로 취업해야 할지 훈련을 들어야 할지 모르겠어요."></textarea>
+          </label>
+
+          <div class="grid-2">
+            <label>
+              지역
+              <select id="region"></select>
+            </label>
+            <label>
+              나이
+              <input id="age" type="number" min="18" max="39" value="27" />
+            </label>
+            <label>
+              희망 직무
+              <select id="desiredJob"></select>
+            </label>
+            <label>
+              훈련 가능 기간
+              <select id="trainingMonths">
+                <option value="0">훈련 어려움</option>
+                <option value="2">2개월</option>
+                <option value="3" selected>3개월</option>
+                <option value="6">6개월</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            이력서/자소서 붙여넣기
+            <textarea id="resumeText" rows="8" placeholder="경력, 프로젝트, 자격증, 기술스택, 자기소개서 일부를 붙여넣으세요."></textarea>
+          </label>
+
+          <label class="file-box">
+            <span>PDF 이력서 업로드</span>
+            <input id="pdfFile" type="file" accept="application/pdf" />
+            <small id="pdfStatus">선택 사항입니다. 추출 실패 시 붙여넣기 입력을 사용합니다.</small>
+          </label>
+
+          <button class="primary" type="submit">경로 시뮬레이션 실행</button>
+        </form>
+
+        <section class="panel output-panel">
+          <div class="panel-head">
+            <div>
+              <p class="section-kicker">Step 2</p>
+              <h2>AI 구조화 결과</h2>
+            </div>
+          </div>
+          <div id="profileCards" class="profile-cards empty">입력 후 분석 결과가 표시됩니다.</div>
+
+          <div class="panel-head sub">
+            <div>
+              <p class="section-kicker">Step 3</p>
+              <h2>경로 비교</h2>
+            </div>
+          </div>
+          <div id="routeResults" class="routes empty">ABM 결과가 여기에 표시됩니다.</div>
+        </section>
+      </section>
+
+      <section class="panel plan-panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-kicker">Step 4</p>
+            <h2>이번 주 실행계획</h2>
+          </div>
+        </div>
+        <div id="actionPlan" class="plan empty">추천 경로가 나오면 실행계획과 이력서 보완 포인트가 생성됩니다.</div>
+      </section>
+
+      <section class="panel data-panel">
+        <div class="panel-head">
+          <div>
+            <p class="section-kicker">Evidence</p>
+            <h2>사용한 공공데이터</h2>
+          </div>
+        </div>
+        <div id="datasetList" class="dataset-list"></div>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
